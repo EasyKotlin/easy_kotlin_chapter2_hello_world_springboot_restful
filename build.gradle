@@ -15,7 +15,9 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springboot_version")
 
 //        Kotlin整合SpringBoot的默认无参构造函数，默认把所有的类设置open类插件
+//        无参（no-arg）编译器插件为具有特定注解的类生成一个额外的零参数构造函数。 这个生成的构造函数是合成的，因此不能从 Java 或 Kotlin 中直接调用，但可以使用反射调用。 这允许 Java Persistence API（JPA）实例化 data 类，虽然它从 Kotlin 或 Java 的角度看没有无参构造函数
         classpath("org.jetbrains.kotlin:kotlin-noarg:$kotlin_version")
+//        全开放插件（kotlin-allopen）
         classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlin_version")
     }
 }
@@ -24,7 +26,10 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 
 //Kotlin整合SpringBoot需要的spring，jpa，org.springframework.boot插件
+
+//Kotlin-spring 编译器插件，它根据 Spring 的要求自动配置全开放插件。
 apply plugin: 'kotlin-spring'
+//该插件指定 @Entity 和 @Embeddable 注解作为应该为一个类生成无参构造函数的标记。
 apply plugin: 'kotlin-jpa'
 apply plugin: 'org.springframework.boot'
 
